@@ -5,6 +5,7 @@ const {
   models: { User, Product },
 } = require("../server/db");
 
+const { faker } = require("@faker-js/faker");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -27,7 +28,7 @@ async function seed() {
       type: "Wand",
       price: 50.0,
       description:
-        "This wand ismade of elderwood, with its core made of thestral hair. Thestral was a winged horse, one of many magical creatures. Its length is 15 inches, with an unknown flexibility.",
+        "This wand is made of elderwood, with its core made of thestral hair. Thestral was a winged horse, one of many magical creatures. Its length is 15 inches, with an unknown flexibility.",
       imageUrl:
         "https://fictionhorizon.com/wp-content/uploads/2022/03/Elder-wand.jpg",
       quantity: 1,
@@ -71,6 +72,45 @@ async function seed() {
       quantity: 22,
     },
   ];
+
+  // creating random wands
+  const wood = [
+    "Maple",
+    "Oak",
+    "Redwood",
+    "Willow",
+    "Ashwood",
+    "Sequoia",
+    "Cherry Wood",
+  ];
+  const wandImages = [
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Celestina-Warbecks-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Cedric-Diggorys-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Sir-Cadogans-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Bellatrix-Lestranges-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Elder-wand.jpg",
+  ];
+  const prices = [23.99, 40.99, 30.25, 50, 100.5];
+
+  const randomWord = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+  const createRandomWand = () => {
+    const randomWood = randomWord(wood);
+    const animal = faker.animal.bird();
+    return {
+      name: `${animal} ${randomWood} Wand`,
+      type: "Wand",
+      description: `This ${randomWood} wand has been expertly crafted and has essence of ${animal} at its core.`,
+      imageUrl: randomWord(wandImages),
+      quantity: Math.floor(Math.random() * 100) + 1,
+      price: randomWord(prices),
+    };
+  };
+  for(let i = 0; i < 50; i++){
+    products.push(createRandomWand())
+  }
+
   // inserts data into db
   await Promise.all(
     products.map((currentProduct) => {
