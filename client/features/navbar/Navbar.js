@@ -5,6 +5,7 @@ import { logout } from "../../app/store";
 import AllProducts from "../components/AllProducts";
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
-            <Link to="/cart"> cart </Link>
+            <Link to="/cart"> {`Cart (${cart.cartItems.length})`} </Link>
           </div>
         )}
       </nav>
