@@ -16,10 +16,28 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
-  ]);
+  // const users = await Promise.all([
+  //   User.create({ username: "cody", password: "123" }),
+  //   User.create({ username: "murphy", password: "123" }),
+  // ]);
+  const users = [
+    {
+      username: "not_Harry_Potter",
+      password: "definitelyNotHarryPotter123"
+    },
+    {
+      username: "ron_weasly",
+      password:"ilovehermoine"
+    },
+    {
+      username: "albus_dumbledore",
+      password: "lemon-drop"
+    },
+    {
+      username: "hermoine_granger",
+      password: "ilovemagic123"
+    }
+  ]
 
   //creating Products
   const products = [
@@ -111,21 +129,37 @@ async function seed() {
     products.push(createRandomWand())
   }
 
+  // creating random wizards
+
+  const createRandomWizard = () =>{
+    return{
+      username: `${faker.name.firstName()}_${faker.name.lastName()}`,
+      password: `${faker.internet.password()}`
+    }
+  }
+  for(let i = 0; i < 15; i++){
+    users.push(createRandomWizard())
+  }
   // inserts data into db
   await Promise.all(
     products.map((currentProduct) => {
       return Product.create(currentProduct);
     })
   );
+  await Promise.all(
+    users.map((currentUser)=>{
+      return User.create(currentUser);
+    })
+  )
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  // };
 }
 
 /*
