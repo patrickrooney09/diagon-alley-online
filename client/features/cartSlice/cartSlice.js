@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 //initial state
+//if there are cartItems existing in localStorage, we get it by the key, which is 'cartItems' and JSON parse it.
+// If it doesn't exist, we set it to empty array
 const initialState = {
-  cartItems: [],
+  cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
 };
@@ -25,6 +29,8 @@ const cartSlice = createSlice({
         const tempProduct = { ...action.payload, cartQuantity: 1 };
         state.cartItems.push(tempProduct);
       }
+      //add our cartItems from state to our localStorage in stringified from
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },
 });
