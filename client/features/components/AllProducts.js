@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../ProductsSlice/ProductsSlice";
+import { fetchProducts } from "../productsSlice/productsSlice";
+import { addToCart } from "../cartSlice/cartSlice";
 
 export default function AllProducts() {
   const dispatch = useDispatch();
@@ -11,19 +12,26 @@ export default function AllProducts() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <div>
       <h1>All Products: </h1>
 
       <ul>
-        {products.map(({ name, type, price, description, imageUrl, id }) => (
-          <li key={id}>
-            <strong>{name}</strong>
+        {products.map((product) => (
+          <li key={product.id}>
+            <strong>{product.name}</strong>
             &nbsp; &nbsp; &nbsp; &nbsp;
-            <img src={imageUrl} />
-            <p>Type: {type}</p>
-            <p>Description: {description}</p>
-            <p>Price: ${price}</p>
+            <img src={product.imageUrl} />
+            <p>Type: {product.type}</p>
+            <p>Description: {product.description}</p>
+            <p>Price: ${product.price}</p>
+            <button onClick={() => handleAddToCart(product)}>
+              Add To Cart
+            </button>
             &nbsp; &nbsp;
           </li>
         ))}
