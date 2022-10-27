@@ -6,6 +6,7 @@ import AllProducts from "../components/AllProducts";
 import AdminPage from "../components/AdminPage";
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -21,6 +22,12 @@ const Navbar = () => {
     dispatch(AdminPage())
     navigate("/adminPage")
   }
+
+  const totalNumOfItemsInCart = (arr) => {
+    let total = 0;
+    arr.forEach((item) => (total = total + item.cartQuantity));
+    return total;
+  };
 
   return (
     <div>
@@ -45,6 +52,11 @@ const Navbar = () => {
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
             <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
+            <Link to="/cart">
+              {" "}
+              {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
+            </Link>
+
           </div>
         )}
       </nav>

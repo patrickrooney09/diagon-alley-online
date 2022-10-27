@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../ProductsSlice/ProductsSlice";
+import { fetchProducts } from "../productsSlice/productsSlice";
+import { addToCart, getTotal } from "../cartSlice/cartSlice";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -9,25 +10,32 @@ function AllProducts() {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(getTotal());
   }, [dispatch]);
+
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
 
   return (
     <div id="all-products">
       <h1>All Products: </h1>
 
       <ul>
-        {products.map(({ name, type, price, description, imageUrl, id, quantity }) => (
-          <li key={id}>
-            <Link to={`/products/${id}`}>
-              <strong>{name}</strong>
-            </Link>
-            <br />
-            <img src={imageUrl} />
-            <p>Type: {type}</p>
-            <p>Description: {description}</p>
-            <p>Price: ${price}</p>
-            <p>{quantity < 6 ? `Only ${quantity} left in stock!` : ""}</p>
-            <br />
+
+        {products.map((product) => (
+          <li key={product.id}>
+            <strong>{product.name}</strong>
+            &nbsp; &nbsp; &nbsp; &nbsp;
+            <img src={product.imageUrl} />
+            <p>Type: {product.type}</p>
+            <p>Description: {product.description}</p>
+            <p>Price: ${product.price}</p>
+            <button onClick={() => handleAddToCart(product)}>
+              Add To Cart
+            </button>
+            &nbsp; &nbsp;
+
           </li>
         ))}
       </ul>
