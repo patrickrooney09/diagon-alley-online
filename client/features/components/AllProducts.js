@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../productsSlice/productsSlice";
-import { addToCart } from "../cartSlice/cartSlice";
+import { addToCart, getTotal } from "../cartSlice/cartSlice";
 
 export default function AllProducts() {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ export default function AllProducts() {
 
   useEffect(() => {
     dispatch(fetchProducts());
+    dispatch(getTotal());
   }, [dispatch]);
 
   const handleAddToCart = (product) => {
