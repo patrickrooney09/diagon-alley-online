@@ -10,6 +10,17 @@ export const fetchUsers = createAsyncThunk("users", async () => {
   }
 });
 
+export const deleteUser = createAsyncThunk(
+  "deleteUser",
+  async(id) =>{
+    try{
+      const {data} = await axios.delete(`/api/users/${id}`)
+    }catch(error){
+      console.error(error)
+    }
+  }
+)
+
 const allUsersSlice = createSlice({
   name: "allUsers",
   initialState: [],

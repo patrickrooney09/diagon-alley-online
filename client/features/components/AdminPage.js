@@ -13,9 +13,6 @@ function AdminPage() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  console.log("users", users);
-  console.log("products", products);
-
   return (
     <div id="admin-page">
       <h1>Admin Page</h1>
