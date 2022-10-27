@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../productsSlice/productsSlice";
 import { addToCart, getTotal } from "../cartSlice/cartSlice";
 
-export default function AllProducts() {
+function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
@@ -18,10 +18,11 @@ export default function AllProducts() {
   };
 
   return (
-    <div>
+    <div id="all-products">
       <h1>All Products: </h1>
 
       <ul>
+
         {products.map((product) => (
           <li key={product.id}>
             <strong>{product.name}</strong>
@@ -34,9 +35,12 @@ export default function AllProducts() {
               Add To Cart
             </button>
             &nbsp; &nbsp;
+
           </li>
         ))}
       </ul>
     </div>
   );
 }
+
+export default AllProducts;

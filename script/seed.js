@@ -5,6 +5,7 @@ const {
   models: { User, Product },
 } = require("../server/db");
 
+const { faker } = require("@faker-js/faker");
 
 /**
  * seed - this function clears the database, updates tables to
@@ -15,10 +16,28 @@ async function seed() {
   console.log("db synced!");
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({ username: "cody", password: "123" }),
-    User.create({ username: "murphy", password: "123" }),
-  ]);
+  // const users = await Promise.all([
+  //   User.create({ username: "cody", password: "123" }),
+  //   User.create({ username: "murphy", password: "123" }),
+  // ]);
+  const users = [
+    {
+      username: "not_Harry_Potter",
+      password: "definitelyNotHarryPotter123"
+    },
+    {
+      username: "ron_weasly",
+      password:"ilovehermoine"
+    },
+    {
+      username: "albus_dumbledore",
+      password: "lemon-drop"
+    },
+    {
+      username: "hermoine_granger",
+      password: "ilovemagic123"
+    }
+  ]
 
   //creating Products
   const products = [
@@ -27,7 +46,7 @@ async function seed() {
       type: "Wand",
       price: 50.0,
       description:
-        "This wand ismade of elderwood, with its core made of thestral hair. Thestral was a winged horse, one of many magical creatures. Its length is 15 inches, with an unknown flexibility.",
+        "This wand is made of elderwood, with its core made of thestral hair. Thestral was a winged horse, one of many magical creatures. Its length is 15 inches, with an unknown flexibility.",
       imageUrl:
         "https://fictionhorizon.com/wp-content/uploads/2022/03/Elder-wand.jpg",
       quantity: 1,
@@ -71,21 +90,76 @@ async function seed() {
       quantity: 22,
     },
   ];
+
+  // creating random wands
+  const wood = [
+    "Maple",
+    "Oak",
+    "Redwood",
+    "Willow",
+    "Ashwood",
+    "Sequoia",
+    "Cherry Wood",
+  ];
+  const wandImages = [
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Celestina-Warbecks-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Cedric-Diggorys-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Sir-Cadogans-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Bellatrix-Lestranges-wand.jpg",
+    "https://fictionhorizon.com/wp-content/uploads/2022/03/Elder-wand.jpg",
+  ];
+  const prices = [23.99, 40.99, 30.25, 50, 100.5];
+
+  const randomWord = (array) => {
+    return array[Math.floor(Math.random() * array.length)];
+  };
+  const createRandomWand = () => {
+    const randomWood = randomWord(wood);
+    const animal = faker.animal.bird();
+    return {
+      name: `${animal} ${randomWood} Wand`,
+      type: "Wand",
+      description: `This ${randomWood} wand has been expertly crafted and has essence of ${animal} at its core.`,
+      imageUrl: randomWord(wandImages),
+      quantity: Math.floor(Math.random() * 100) + 1,
+      price: randomWord(prices),
+    };
+  };
+  for(let i = 0; i < 50; i++){
+    products.push(createRandomWand())
+  }
+
+  // creating random wizards
+
+  const createRandomWizard = () =>{
+    return{
+      username: `${faker.name.firstName()}_${faker.name.lastName()}`,
+      password: `${faker.internet.password()}`
+    }
+  }
+  for(let i = 0; i < 15; i++){
+    users.push(createRandomWizard())
+  }
   // inserts data into db
   await Promise.all(
     products.map((currentProduct) => {
       return Product.create(currentProduct);
     })
   );
+  await Promise.all(
+    users.map((currentUser)=>{
+      return User.create(currentUser);
+    })
+  )
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-  };
+  // return {
+  //   users: {
+  //     cody: users[0],
+  //     murphy: users[1],
+  //   },
+  // };
 }
 
 /*

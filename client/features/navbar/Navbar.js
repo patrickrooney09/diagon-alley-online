@@ -13,6 +13,10 @@ const Navbar = () => {
     dispatch(logout());
     navigate("/login");
   };
+  const allProductsPage = () => {
+    dispatch(AllProducts());
+    navigate("/products");
+  };
 
   const totalNumOfItemsInCart = (arr) => {
     let total = 0;
@@ -28,6 +32,9 @@ const Navbar = () => {
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
+            <Link to="/products" onClick={allProductsPage}>
+              Products
+            </Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
