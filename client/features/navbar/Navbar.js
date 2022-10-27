@@ -5,6 +5,7 @@ import { logout } from "../../app/store";
 import AllProducts from "../components/AllProducts";
 
 const Navbar = () => {
+  const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -15,6 +16,12 @@ const Navbar = () => {
   const allProductsPage = () => {
     dispatch(AllProducts());
     navigate("/products");
+  };
+
+  const totalNumOfItemsInCart = (arr) => {
+    let total = 0;
+    arr.forEach((item) => (total = total + item.cartQuantity));
+    return total;
   };
 
   return (
@@ -38,6 +45,10 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
+            <Link to="/cart">
+              {" "}
+              {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
+            </Link>
           </div>
         )}
       </nav>

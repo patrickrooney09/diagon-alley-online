@@ -18,7 +18,7 @@ router.get("/:id", async (req, res, next) => {
     if (product) {
       res.json(product);
     } else {
-      const err = new Error("API route not found");
+      const err = new Error("Product not found !");
       err.status = 404;
     }
   } catch (err) {

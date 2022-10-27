@@ -5,6 +5,8 @@ import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
 import AllProducts from '../features/components/AllProducts';
 import SingleProduct from '../features/components/SingleProduct';
+import Cart from "../features/components/Cart";
+
 // import { me } from './store';
 
 /**
@@ -24,6 +26,7 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
+          <Route to="/cart" element={<Cart />} />
           <Route to="/home" element={<Home />} />
           <Route to="/products" element={<AllProducts />} />
         </Routes>
@@ -42,7 +45,11 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
+
+          <Route path="/cart" element={<Cart />} />
+
           <Route path="/products/:productId/*" element={<SingleProduct />} />
+
         </Routes>
       )}
     </div>
