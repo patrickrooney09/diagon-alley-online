@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import AllProducts from "../components/AllProducts";
+import AdminPage from "../components/AdminPage";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
@@ -17,6 +18,10 @@ const Navbar = () => {
     dispatch(AllProducts());
     navigate("/products");
   };
+  const adminPage = () =>{
+    dispatch(AdminPage())
+    navigate("/adminPage")
+  }
 
   const totalNumOfItemsInCart = (arr) => {
     let total = 0;
@@ -35,6 +40,7 @@ const Navbar = () => {
             <Link to="/products" onClick={allProductsPage}>
               Products
             </Link>
+            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
@@ -45,10 +51,12 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
+            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
             <Link to="/cart">
               {" "}
               {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
             </Link>
+
           </div>
         )}
       </nav>
