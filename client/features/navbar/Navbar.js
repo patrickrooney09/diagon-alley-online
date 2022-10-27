@@ -14,6 +14,12 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  const totalNumOfItemsInCart = (arr) => {
+    let total = 0;
+    arr.forEach((item) => (total = total + item.cartQuantity));
+    return total;
+  };
+
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -32,7 +38,10 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
-            <Link to="/cart"> {`Cart (${cart.cartItems.length})`} </Link>
+            <Link to="/cart">
+              {" "}
+              {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}
+            </Link>
           </div>
         )}
       </nav>
