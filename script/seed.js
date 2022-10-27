@@ -23,7 +23,8 @@ async function seed() {
   const users = [
     {
       username: "not_Harry_Potter",
-      password: "definitelyNotHarryPotter123"
+      password: "definitelyNotHarryPotter123",
+      isAdmin: true
     },
     {
       username: "ron_weasly",
@@ -125,7 +126,7 @@ async function seed() {
       price: randomWord(prices),
     };
   };
-  for(let i = 0; i < 50; i++){
+  for(let i = 0; i < 200; i++){
     products.push(createRandomWand())
   }
 

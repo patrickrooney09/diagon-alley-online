@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import AllProducts from "../components/AllProducts";
+import AdminPage from "../components/AdminPage";
 
 const Navbar = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
@@ -16,6 +17,10 @@ const Navbar = () => {
     dispatch(AllProducts());
     navigate("/products");
   };
+  const adminPage = () =>{
+    dispatch(AdminPage())
+    navigate("/adminPage")
+  }
 
   return (
     <div>
@@ -28,6 +33,7 @@ const Navbar = () => {
             <Link to="/products" onClick={allProductsPage}>
               Products
             </Link>
+            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
@@ -38,6 +44,7 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
+            <Link to= "/adminPage" onClick = {adminPage}>Admin Page</Link>
           </div>
         )}
       </nav>
