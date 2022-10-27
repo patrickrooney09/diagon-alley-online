@@ -17,4 +17,4 @@ const store = configureStore({
 });
 
 export default store;
-export * from '../features/auth/authSlice'; //jfdklsh
+export * from '../features/auth/authSlice'; 

@@ -1,14 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../ProductsSlice/ProductsSlice";
+import { fetchUsers } from "../UserSlice/allUsersSlice";
 
 function AdminPage() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+  const users = useSelector((state) => state.allUsers);
 
   useEffect(() => {
+    dispatch(fetchUsers());
     dispatch(fetchProducts());
   }, [dispatch]);
+
+  console.log("users", users);
+  console.log("products", products);
+
   return (
     <div id="admin-page">
       <h1>Admin Page</h1>
@@ -28,11 +35,23 @@ function AdminPage() {
         </ol>
       </div>
 
-      <div id = "admin-all-users">
-          
+      <div id="admin-all-users">
+        <h1>Users</h1>
+        <ol>
+          {users && users.length ? (
+            users.map((currentUser) => {
+              return (
+                <li key={currentUser.id}>
+                  <p>{currentUser.username}</p>
+                </li>
+              );
+            })
+          ) : (
+            <li>Loading User</li>
+          )}
+        </ol>
       </div>
     </div>
-
   );
 }
 
