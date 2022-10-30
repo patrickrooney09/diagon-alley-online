@@ -4,8 +4,15 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import AllProducts from "../features/components/AllProducts";
+
+import SingleProduct from "../features/components/SingleProduct";
+
+import AdminPage from "../features/components/AdminPage";
+
+
 import SingleProduct from "../features/products/SingleProduct";
 import AdminPage from "../features/components/AdminPage";
+
 import Cart from "../features/components/Cart";
 
 import { me } from "./store";
@@ -27,6 +34,7 @@ const AppRoutes = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path="/*" element={<Home />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/home" element={<Home />} />
           <Route path="/products" element={<AllProducts />} />
