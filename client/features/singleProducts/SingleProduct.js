@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectSingleProduct,
-  fetchSingleProduct,
-} from "../ProductsSlice/SingleProductsSlice";
+import { selectSingleProduct, fetchSingleProduct } from "./SingleProductsSlice";
 
 function SingleProduct() {
   const { productId } = useParams();
