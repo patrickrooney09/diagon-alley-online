@@ -1,34 +1,121 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateProductAsync } from "../allProducts/ProductsSlice";
-import { fetchProducts } from "../allProducts/ProductsSlice";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import {
+  selectSingleProduct,
+  fetchSingleProduct,
+} from "../singleProducts/SingleProductsSlice";
 
-const EditProductForm = (props) => {
-  const id = props.product.id;
+const EditProductForm = () => {
+
+  const { productId } = useParams();
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
-  let productData = { id, name };
-  // console.log("ID:", props.product.id)
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(updateProductAsync(productData));
-    setName("");
+
+  useEffect(() => {
+    dispatch(fetchSingleProduct(productId));
+  }, [dispatch]);
+
+  let singleProduct = useSelector(selectSingleProduct);
+
+  let productData = {
+    id: singleProduct.id,
+    name: singleProduct.name,
+    description: singleProduct.description,
+    imageUrl: singleProduct.imageUrl,
+    price: singleProduct.price,
   };
 
+
+  console.log("SINGLE PRODUCT:", productData);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await dispatch(updateProductAsync(productData));
+    await dispatch(fetchSingleProduct(productId));
+    navigate("/adminPage")
+  };
+
+
+
   return (
-    <form id="product-form" onSubmit={handleSubmit}>
-      <p>Edit Information:</p>
-      <label htmlFor="productName">Name:</label>
-      <input
-        type="text"
-        name="productName"
-        value={name}
-        onChange={(event) => setName(event.target.value)}
-      />
-      <button type="submit">Submit Changes</button>
-    </form>
+    <div id="edit-products">
+      <h1>Hello</h1>
+      <Link to="/adminPage">Back to Admin Page</Link>
+      <h3>Current Information:</h3>
+      <p>
+        <strong>Name:</strong> {singleProduct.name}
+      </p>
+      <p>
+        <strong>Description:</strong> {singleProduct.description}
+      </p>
+      <p>
+        <strong>Price:</strong> ${singleProduct.price}
+      </p>
+      <p>
+        <strong>Type:</strong> {singleProduct.type}
+      </p>
+      <img src={singleProduct.imageUrl} width="100" height="100"></img>
+
+      <form id="product-form" onSubmit={handleSubmit}>
+        <h3>Edit Information:</h3>
+
+        <label htmlFor="productName">
+          <strong>Edit Name</strong>:
+        </label>
+        <input
+          type="text"
+          name="productName"
+          defaultValue={singleProduct.name}
+          onChange={(event) => (productData.name = event.target.value)}
+        ></input>
+        <label htmlFor="description">
+          <strong>Edit Description:</strong>
+        </label>
+        <textarea
+          type="text"
+          name="description"
+          defaultValue={singleProduct.description}
+          onChange={(event) => (productData.description = event.target.value)}
+          rows="5"
+          cols="50"
+        ></textarea>
+        <label htmlFor="imageUrl">
+          <strong>Edit ImageUrl:</strong>
+        </label>
+        <textarea
+          type="text"
+          name="imageUrl"
+          defaultValue={singleProduct.imageUrl}
+          onChange={(event) => (productData.imageUrl = event.target.value)}
+          rows="1"
+          cols="70"
+        ></textarea>
+        <label htmlFor="price">
+          <strong>Edit Price:</strong>
+        </label>
+        <input
+          type="number"
+          name="price"
+          defaultValue={singleProduct.price}
+          onChange={(event) => (productData.price = event.target.value)}
+          step="any"
+        ></input>
+        <label htmlFor="type">
+          <strong>Type</strong>
+        </label>
+        <select
+          name="type"
+          onChange={(event) => (productData.type = event.target.value)}
+        >
+          <option value="wand">Wand</option>
+        </select>
+        <button type="submit">Submit Changes</button>
+      </form>
+    </div>
   );
 };
 
