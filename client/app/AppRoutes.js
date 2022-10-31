@@ -10,6 +10,7 @@ import SingleProduct from "../features/singleProducts/SingleProduct";
 import AdminPage from "../features/admin/AdminPage";
 
 import Cart from "../features/localCart/Cart";
+import EditProductForm from "../features/admin/EditProductsForm";
 
 import { me } from "./store";
 
@@ -36,6 +37,7 @@ const AppRoutes = () => {
           <Route path="/products" element={<AllProducts />} />
           <Route path="/products/:productId" element={<SingleProduct />} />
           <Route path="/adminPage" element={<AdminPage />} />
+          <Route path = "/adminPage/product/:productId" element = {<EditProductForm />} />
         </Routes>
       ) : (
         <Routes>

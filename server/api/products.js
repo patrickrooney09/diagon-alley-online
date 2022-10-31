@@ -38,6 +38,15 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
+// api route to add one product into the database
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Product.create(req.body));
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put("/:id", async (req, res, next) => {
   try {
     const product = await Product.findByPk(req.params.id);
