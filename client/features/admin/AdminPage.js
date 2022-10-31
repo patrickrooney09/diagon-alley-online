@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProducts,
   deleteProductAsync,
-} from "../ProductsSlice/ProductsSlice";
-import { fetchUsers, deleteUserAsync } from "../UserSlice/allUsersSlice";
+} from "../allProducts/ProductsSlice";
+import { fetchUsers, deleteUserAsync } from "../admin/allUsersSlice";
 import EditProductForm from "./EditProductsForm";
 
 function AdminPage() {
@@ -35,26 +35,24 @@ function AdminPage() {
       <div id="admin-all-products">
         <strong>Edit Products</strong>
         <ol>
-          {products.map(
-            (currentProduct) => (
-              <li key={currentProduct.id}>
-
-                <EditProductForm product = {currentProduct}/>
-                <p>
-                  {currentProduct.name} || Type: {currentProduct.type} || Price: ${currentProduct.price}
-                </p>
-                <p>{currentProduct.description}</p>
-                <button
-                  id="delete-button"
-                  onClick={() => {
-                    handleProductDelete(currentProduct.id);
-                  }}
-                >
-                  Delete Product
-                </button>
-              </li>
-            )
-          )}
+          {products.map((currentProduct) => (
+            <li key={currentProduct.id}>
+              <EditProductForm product={currentProduct} />
+              <p>
+                {currentProduct.name} || Type: {currentProduct.type} || Price: $
+                {currentProduct.price}
+              </p>
+              <p>{currentProduct.description}</p>
+              <button
+                id="delete-button"
+                onClick={() => {
+                  handleProductDelete(currentProduct.id);
+                }}
+              >
+                Delete Product
+              </button>
+            </li>
+          ))}
         </ol>
       </div>
 

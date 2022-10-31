@@ -3,17 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
-import AllProducts from "../features/components/AllProducts";
+import AllProducts from "../features/allProducts/AllProducts";
 
-import SingleProduct from "../features/components/SingleProduct";
+import SingleProduct from "../features/singleProducts/SingleProduct";
 
-import AdminPage from "../features/components/AdminPage";
+import AdminPage from "../features/admin/AdminPage";
 
-
-import SingleProduct from "../features/products/SingleProduct";
-import AdminPage from "../features/components/AdminPage";
-
-import Cart from "../features/components/Cart";
+import Cart from "../features/localCart/Cart";
 
 import { me } from "./store";
 

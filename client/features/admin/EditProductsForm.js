@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateProductAsync } from "../ProductsSlice/ProductsSlice";
-import { fetchProducts } from "../ProductsSlice/ProductsSlice";
+import { updateProductAsync } from "../allProducts/ProductsSlice";
+import { fetchProducts } from "../allProducts/ProductsSlice";
 
 const EditProductForm = (props) => {
-  const id = props.product.id
+  const id = props.product.id;
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
