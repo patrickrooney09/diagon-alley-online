@@ -39,6 +39,7 @@ function AdminPage() {
         <ol>
           {products.map((currentProduct) => (
             <li key={currentProduct.id}>
+
               <p>
                 <strong>Name:</strong> {currentProduct.name}
               </p>
@@ -61,7 +62,6 @@ function AdminPage() {
               <Link to={`/adminPage/product/${currentProduct.id}`}>
                 Edit Product
               </Link>
-              {/* <EditProductForm currentProduct = {currentProduct}/> */}
               <button
                 id="delete-button"
                 onClick={() => {

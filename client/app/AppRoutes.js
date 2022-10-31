@@ -4,13 +4,12 @@ import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
 import AllProducts from "../features/allProducts/AllProducts";
-
 import SingleProduct from "../features/singleProducts/SingleProduct";
-
 import AdminPage from "../features/admin/AdminPage";
-
 import Cart from "../features/localCart/Cart";
 import EditProductForm from "../features/admin/EditProductsForm";
+
+
 
 import { me } from "./store";
 
