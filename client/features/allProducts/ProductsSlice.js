@@ -43,6 +43,19 @@ export const updateProductAsync = createAsyncThunk(
   }
 );
 
+// action to add product into the database
+export const addProductAsync = createAsyncThunk(
+  "addProduct",
+  async (newProduct) => {
+    try {
+      const { data } = await axios.post("/api/products", newProduct);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 //make a products slice and export its reducer by default
 const productsSlice = createSlice({
   name: "products",
@@ -52,6 +65,12 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(addProductAsync.fulfilled, (state, action)=>{
+      console.log(action)
+
+      state.push(action.payload)
+
+    })
   },
 });
 
