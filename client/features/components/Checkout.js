@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { clearCart, getTotal } from '../cartSlice/cartSlice';
+import { clearCart, getTotal } from '../localCart/cartSlice';
 
 function Checkout() {
 	const dispatch = useDispatch();
