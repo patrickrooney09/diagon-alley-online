@@ -8,6 +8,8 @@ import AdminPage from "../admin/AdminPage";
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+  const username = useSelector((state) => state.auth.me.username);
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logoutAndRedirectHome = () => {
@@ -34,8 +36,7 @@ const Navbar = () => {
     <div>
       <h1>FS-App-Template</h1>
       <nav>
-        {isLoggedIn ? (
-          <div>
+        {isLoggedIn ? ( isAdmin? <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to="/products">Products</Link>
@@ -43,6 +44,17 @@ const Navbar = () => {
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
+            <p>Logged in as: {username}</p>
+          </div>:
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home">Home</Link>
+            <Link to="/products">Products</Link>
+
+            <button type="button" onClick={logoutAndRedirectHome}>
+              Logout
+            </button>
+            <p>Logged in as: {username}</p>
           </div>
         ) : (
           <div>
@@ -50,10 +62,6 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
-            <Link to="/adminPage" onClick={adminPage}>
-              Admin Page
-            </Link>
-
             <Link to="/cart">
               {" "}
               {`Cart (${totalNumOfItemsInCart(cart.cartItems)})`}{" "}

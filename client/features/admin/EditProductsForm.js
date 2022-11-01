@@ -8,12 +8,9 @@ import {
 } from "../singleProducts/SingleProductsSlice";
 
 const EditProductForm = () => {
-
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
 
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
@@ -29,17 +26,12 @@ const EditProductForm = () => {
     price: singleProduct.price,
   };
 
-
-  console.log("SINGLE PRODUCT:", productData);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(updateProductAsync(productData));
-    await dispatch(fetchSingleProduct(productId));
-    navigate("/adminPage")
+    // await dispatch(fetchSingleProduct(productId));
+    navigate("/adminPage");
   };
-
-
 
   return (
     <div id="edit-products">
@@ -69,7 +61,7 @@ const EditProductForm = () => {
         <input
           type="text"
           name="productName"
-          defaultValue={singleProduct.name}
+          placeholder={singleProduct.name}
           onChange={(event) => (productData.name = event.target.value)}
         ></input>
         <label htmlFor="description">
@@ -78,7 +70,7 @@ const EditProductForm = () => {
         <textarea
           type="text"
           name="description"
-          defaultValue={singleProduct.description}
+          placeHolder={singleProduct.description}
           onChange={(event) => (productData.description = event.target.value)}
           rows="5"
           cols="50"
@@ -89,7 +81,7 @@ const EditProductForm = () => {
         <textarea
           type="text"
           name="imageUrl"
-          defaultValue={singleProduct.imageUrl}
+          placeHolder={singleProduct.imageUrl}
           onChange={(event) => (productData.imageUrl = event.target.value)}
           rows="1"
           cols="70"
@@ -100,7 +92,7 @@ const EditProductForm = () => {
         <input
           type="number"
           name="price"
-          defaultValue={singleProduct.price}
+          placeHolder={singleProduct.price}
           onChange={(event) => (productData.price = event.target.value)}
           step="any"
         ></input>
