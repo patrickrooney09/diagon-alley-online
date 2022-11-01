@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addProductAsync, fetchProducts } from "../allProducts/ProductsSlice";
 
@@ -14,10 +14,11 @@ const AddProductForm = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    dispatch(addProductAsync(newProductData));
-    dispatch(fetchProducts())
+    await dispatch(addProductAsync(newProductData));
+    await dispatch(fetchProducts()) // i guess async await is whats making this work...
     setName("");
     setType("");
     setPrice(0);

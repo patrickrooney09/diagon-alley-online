@@ -126,7 +126,7 @@ async function seed() {
       price: randomWord(prices),
     };
   };
-  for(let i = 0; i < 200; i++){
+  for(let i = 0; i < 1; i++){
     products.push(createRandomWand())
   }
 

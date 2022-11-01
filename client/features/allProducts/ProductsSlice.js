@@ -65,6 +65,12 @@ const productsSlice = createSlice({
     builder.addCase(fetchProducts.fulfilled, (state, action) => {
       return action.payload;
     });
+    builder.addCase(addProductAsync.fulfilled, (state, action)=>{
+      console.log(action)
+
+      state.push(action.payload)
+
+    })
   },
 });
 
