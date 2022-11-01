@@ -9,8 +9,6 @@ import AdminPage from "../features/admin/AdminPage";
 import Cart from "../features/localCart/Cart";
 import EditProductForm from "../features/admin/EditProductsForm";
 
-
-
 import { me } from "./store";
 
 /**
@@ -19,7 +17,7 @@ import { me } from "./store";
 
 const AppRoutes = () => {
   const isLoggedIn = useSelector((state) => !!state.auth.me.id);
-
+  const isAdmin = useSelector((state) => state.auth.me.isAdmin);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,15 +27,33 @@ const AppRoutes = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <Routes>
-          <Route path="/*" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/products" element={<AllProducts />} />
-          <Route path="/products/:productId" element={<SingleProduct />} />
-          <Route path="/adminPage" element={<AdminPage />} />
-          <Route path = "/adminPage/product/:productId" element = {<EditProductForm />} />
-        </Routes>
+        isAdmin ? (
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/products/:productId" element={<SingleProduct />} />
+            <Route path="/adminPage" element={<AdminPage />} />
+            <Route
+              path="/adminPage/product/:productId"
+              element={<EditProductForm />}
+            />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/*" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/products/:productId" element={<SingleProduct />} />
+            {/* <Route path="/adminPage" element={<AdminPage />} />
+            <Route
+              path="/adminPage/product/:productId"
+              element={<EditProductForm />}
+            /> */}
+          </Routes>
+        )
       ) : (
         <Routes>
           <Route
