@@ -13,8 +13,6 @@ const EditProductForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     dispatch(fetchSingleProduct(productId));
   }, [dispatch]);
@@ -29,7 +27,6 @@ const EditProductForm = () => {
     price: singleProduct.price,
   };
 
-
   console.log("SINGLE PRODUCT:", productData);
 
   const handleSubmit = async (event) => {
@@ -38,9 +35,7 @@ const EditProductForm = () => {
     await dispatch(fetchSingleProduct(productId));
     navigate("/adminPage")
   };
-
-
-
+  
   return (
     <div id="edit-products">
       <h1>Hello</h1>
