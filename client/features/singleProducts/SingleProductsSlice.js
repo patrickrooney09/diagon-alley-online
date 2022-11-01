@@ -13,18 +13,6 @@ export const fetchSingleProduct = createAsyncThunk(
 	}
 );
 
-export const editProduct = createAsyncThunk(
-	'products/editProduct',
-	async ({id, name, }) => {
-		try {
-			const { data } = await axios.put(`/api/products/${productId}`);
-			return data;
-		} catch (error) {
-			console.log(error);
-		}
-	}
-);
-
 const singleProductSlice = createSlice({
 	name: 'singleProduct',
 	initialState: {},
