@@ -18,6 +18,7 @@ import { me } from './store';
 
 const AppRoutes = () => {
 	const isLoggedIn = useSelector((state) => !!state.auth.me.id);
+	const isAdmin = useSelector((state) => state.auth.me.isAdmin);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -32,7 +33,6 @@ const AppRoutes = () => {
 
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/checkout" element={<Checkout />} />
-
 					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/products" element={<AllProducts />} />

@@ -8,7 +8,6 @@ import {
 } from "../singleProducts/SingleProductsSlice";
 
 const EditProductForm = () => {
-
   const { productId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,15 +26,22 @@ const EditProductForm = () => {
     price: singleProduct.price,
   };
 
+<<<<<<< HEAD
   console.log("SINGLE PRODUCT:", productData);
 
+=======
+>>>>>>> 9345b23158d301dfe60b1abc64cf3980b6504cb2
   const handleSubmit = async (event) => {
     event.preventDefault();
     await dispatch(updateProductAsync(productData));
-    await dispatch(fetchSingleProduct(productId));
-    navigate("/adminPage")
+    // await dispatch(fetchSingleProduct(productId));
+    navigate("/adminPage");
   };
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 9345b23158d301dfe60b1abc64cf3980b6504cb2
   return (
     <div id="edit-products">
       <h1>Hello</h1>
@@ -64,7 +70,7 @@ const EditProductForm = () => {
         <input
           type="text"
           name="productName"
-          defaultValue={singleProduct.name}
+          placeholder={singleProduct.name}
           onChange={(event) => (productData.name = event.target.value)}
         ></input>
         <label htmlFor="description">
@@ -73,7 +79,7 @@ const EditProductForm = () => {
         <textarea
           type="text"
           name="description"
-          defaultValue={singleProduct.description}
+          placeHolder={singleProduct.description}
           onChange={(event) => (productData.description = event.target.value)}
           rows="5"
           cols="50"
@@ -84,7 +90,7 @@ const EditProductForm = () => {
         <textarea
           type="text"
           name="imageUrl"
-          defaultValue={singleProduct.imageUrl}
+          placeHolder={singleProduct.imageUrl}
           onChange={(event) => (productData.imageUrl = event.target.value)}
           rows="1"
           cols="70"
@@ -95,7 +101,7 @@ const EditProductForm = () => {
         <input
           type="number"
           name="price"
-          defaultValue={singleProduct.price}
+          placeHolder={singleProduct.price}
           onChange={(event) => (productData.price = event.target.value)}
           step="any"
         ></input>
