@@ -34,30 +34,34 @@ const Navbar = () => {
 
   return (
     <div>
-      <h1>FS-App-Template</h1>
-      <nav>
-        {isLoggedIn ? ( isAdmin? <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/adminPage">Admin Page</Link>
-            <button type="button" onClick={logoutAndRedirectHome}>
-              Logout
-            </button>
-            <p>Logged in as: {username}</p>
-          </div>:
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <Link to="/products">Products</Link>
+      <h1 className="shop-name">Diagon Alley Shop</h1>
+      <nav className="nav-bar">
+        {isLoggedIn ? (
+          isAdmin ? (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to="/home">Home</Link>
+              <Link to="/products">Products</Link>
+              <Link to="/adminPage">Admin Page</Link>
+              <button type="button" onClick={logoutAndRedirectHome}>
+                Logout
+              </button>
+              <p>Logged in as: {username}</p>
+            </div>
+          ) : (
+            <div>
+              {/* The navbar will show these links after you log in */}
+              <Link to="/home">Home</Link>
+              <Link to="/products">Products</Link>
 
-            <button type="button" onClick={logoutAndRedirectHome}>
-              Logout
-            </button>
-            <p>Logged in as: {username}</p>
-          </div>
+              <button type="button" onClick={logoutAndRedirectHome}>
+                Logout
+              </button>
+              <p>Logged in as: {username}</p>
+            </div>
+          )
         ) : (
-          <div>
+          <div className="login-info">
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>

@@ -1,5 +1,30 @@
 body {
   font-family: sans-serif;
+  /* font-family: "Cinzel Decorative", cursive; */
+}
+
+.shop-name {
+  /* font-family: sans-serif; */
+  font-family: "Cinzel Decorative", cursive;
+  justify-content: center;
+  display: flex;
+  background-size: 70px;
+  background-color: #cca435;
+  /* border-radius: 30%; */
+  margin-left: 180pt;
+  margin-right: 180pt;
+}
+.nav-bar {
+  /* font-family: sans-serif; */
+  display: flex;
+  justify-content: center;
+  font-family: "Julius Sans One", sans-serif;
+  /* font-size: larger; */
+  font-weight: bolder;
+}
+
+.login-info {
+  font-family: "Julius Sans One", sans-serif;
 }
 
 a {
