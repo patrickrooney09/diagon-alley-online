@@ -7,9 +7,8 @@ import AllProducts from "../features/allProducts/AllProducts";
 import SingleProduct from "../features/singleProducts/SingleProduct";
 import AdminPage from "../features/admin/AdminPage";
 import Cart from "../features/localCart/Cart";
+
 import EditProductForm from "../features/admin/EditProductsForm";
-
-
 
 import { me } from "./store";
 

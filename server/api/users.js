@@ -42,10 +42,8 @@ router.get("/", async (req, res, next) => {
 //find one specific user info
 router.get("/:id", async (req, res, next) => {
   try {
-    const user = await User.findOne({
-      where: {
-        id: req.params.id,
-      },
+    const user = await User.findOne(req.params.id, {
+      attributes: ["id", "username"],
     });
     res.json(user);
   } catch (err) {
@@ -53,10 +51,22 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-// delete student by id
+// create users
+router.post("/", async (req, res, next) => {
+  try {
+    const user = await User.create(req.body);
+    res.json(user);
+  } catch (err) {
+    next(err)
+  }
+})
+
+// delete user by id
 router.delete("/:id", async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+      attributes: ["id", "username"],
+    });
     await user.destroy();
     res.send(user);
   } catch (error) {
