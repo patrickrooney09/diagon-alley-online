@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import AuthForm from '../features/auth/AuthForm';
 import Home from '../features/home/Home';
-import AllProducts from '../features/components/AllProducts';
-import SingleProduct from '../features/components/SingleProduct';
-import AdminPage from '../features/components/AdminPage';
-import Cart from '../features/components/Cart';
-import { me } from './store';
+import AllProducts from '../features/allProducts/AllProducts';
+import SingleProduct from '../features/singleProducts/SingleProduct';
+import AdminPage from '../features/admin/AdminPage';
+import Cart from '../features/localCart/Cart';
+import EditProductForm from '../features/admin/EditProductsForm';
 import Checkout from '../features/components/Checkout';
 import PurchaseConfirmed from '../features/components/PurchaseConfirmed';
+import { me } from './store';
 
 /**
  * COMPONENT
@@ -31,6 +32,8 @@ const AppRoutes = () => {
 
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/checkout" element={<Checkout />} />
+
+					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/products" element={<AllProducts />} />
 					<Route path="/products/:productId" element={<SingleProduct />} />
@@ -53,8 +56,8 @@ const AppRoutes = () => {
 					<Route path="/products" element={<AllProducts />} />
 					<Route path="/products/:productId/*" element={<SingleProduct />} />
 					<Route path="/cart" element={<Cart />} />
-					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
 					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
 					<Route path="/adminPage" element={<AdminPage />} />
 				</Routes>
 			)}

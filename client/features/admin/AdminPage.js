@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link } from "react-router-dom";
 import {
   fetchProducts,
   deleteProductAsync,
-} from "../ProductsSlice/ProductsSlice";
-import { fetchUsers, deleteUserAsync } from "../UserSlice/allUsersSlice";
+} from "../allProducts/ProductsSlice";
+import { fetchUsers, deleteUserAsync } from "../admin/allUsersSlice";
+import AddProductForm from "./AddProductForm";
 import EditProductForm from "./EditProductsForm";
 
 function AdminPage() {
@@ -33,28 +34,44 @@ function AdminPage() {
       <h1>Admin Page</h1>
 
       <div id="admin-all-products">
+        <AddProductForm id="add-product-form" />
         <strong>Edit Products</strong>
         <ol>
-          {products.map(
-            (currentProduct) => (
-              <li key={currentProduct.id}>
+          {products.map((currentProduct) => (
+            <li key={currentProduct.id}>
 
-                <EditProductForm product = {currentProduct}/>
-                <p>
-                  {currentProduct.name} || Type: {currentProduct.type} || Price: ${currentProduct.price}
-                </p>
-                <p>{currentProduct.description}</p>
-                <button
-                  id="delete-button"
-                  onClick={() => {
-                    handleProductDelete(currentProduct.id);
-                  }}
-                >
-                  Delete Product
-                </button>
-              </li>
-            )
-          )}
+              <p>
+                <strong>Name:</strong> {currentProduct.name}
+              </p>
+              <p>
+                <strong>Description:</strong> {currentProduct.description}
+              </p>
+              <p>
+                <strong>Price:</strong> ${currentProduct.price}
+              </p>
+              <p>
+                <strong>Type:</strong> {currentProduct.type}
+              </p>
+              <p>
+                <strong>Quantity:</strong> {currentProduct.quantity}
+              </p>
+              <p>
+                <strong>ID:</strong> {currentProduct.id}
+              </p>
+              <img src={currentProduct.imageUrl} width="100" height="100"></img>
+              <Link to={`/adminPage/product/${currentProduct.id}`}>
+                Edit Product
+              </Link>
+              <button
+                id="delete-button"
+                onClick={() => {
+                  handleProductDelete(currentProduct.id);
+                }}
+              >
+                Delete Product
+              </button>
+            </li>
+          ))}
         </ol>
       </div>
 

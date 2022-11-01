@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../productsSlice/productsSlice";
-import { addToCart, getTotal } from "../cartSlice/cartSlice";
-import { addToUserCart } from "../cartSlice/cartForUser";
+import { fetchProducts } from "./ProductsSlice";
+import { addToUserCart } from "../userCart/cartForUser";
+import { addToCart, getTotal } from "../localCart/cartSlice";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-
-  //we can check if user is logged in by using useSelector
   const { id } = useSelector((state) => state.auth.me);
 
   useEffect(() => {
@@ -29,7 +27,6 @@ function AllProducts() {
   return (
     <div id="all-products">
       <h1>All Products: </h1>
-
       <ul>
         {products.map((product) => (
           <li key={product.id}>
@@ -41,10 +38,15 @@ function AllProducts() {
             <p>Type: {product.type}</p>
             <p>Description: {product.description}</p>
             <p>Price: ${product.price}</p>
+            <p>
+              {product.quantity < 6
+                ? `Only ${product.quantity} left in stock!`
+                : ""}
+            </p>
             <button onClick={() => handleAddToCart(product, id)}>
               Add To Cart
             </button>
-            &nbsp; &nbsp;
+            <br />
           </li>
         ))}
       </ul>
@@ -53,3 +55,4 @@ function AllProducts() {
 }
 
 export default AllProducts;
+// { name, type, price, description, imageUrl, id, quantity }
