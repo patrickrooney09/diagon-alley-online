@@ -28,17 +28,33 @@ const AppRoutes = () => {
 	return (
 		<div>
 			{isLoggedIn ? (
-				<Routes>
-					<Route path="/*" element={<Home />} />
-
-					<Route path="/cart" element={<Cart />} />
-					<Route path="/checkout" element={<Checkout />} />
-					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
-					<Route path="/home" element={<Home />} />
-					<Route path="/products" element={<AllProducts />} />
-					<Route path="/products/:productId" element={<SingleProduct />} />
-					<Route path="/adminPage" element={<AdminPage />} />
-				</Routes>
+				isAdmin ? (
+					<Routes>
+						<Route path="/*" element={<Home />} />
+						<Route path="/cart" element={<Cart />} />
+						<Route path="/checkout" element={<Checkout />} />
+						<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
+						<Route path="/home" element={<Home />} />
+						<Route path="/products" element={<AllProducts />} />
+						<Route path="/products/:productId" element={<SingleProduct />} />
+						<Route path="/adminPage" element={<AdminPage />} />
+						<Route
+							path="/adminPage/product/:productId"
+							element={<EditProductForm />}
+						/>
+					</Routes>
+				) : (
+					<Routes>
+						<Route path="/*" element={<Home />} />
+						<Route path="/cart" element={<Cart />} />
+						<Route path="/home" element={<Home />} />
+						<Route path="/products" element={<AllProducts />} />
+						<Route path="/products/:productId" element={<SingleProduct />} />
+						{/* <Route path="/adminPage" element={<AdminPage />} />
+           					<Route path="/adminPage/product/:productId" element={<EditProductForm />}
+            /> */}
+					</Routes>
+				)
 			) : (
 				<Routes>
 					<Route
@@ -58,7 +74,8 @@ const AppRoutes = () => {
 					<Route path="/cart" element={<Cart />} />
 					<Route path="/checkout" element={<Checkout />} />
 					<Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
-					<Route path="/adminPage" element={<AdminPage />} />
+					 {/* <Route path="/adminPage" element={<AdminPage />} />
+        				<Route path = "/adminPage/product/:productId" element = {<EditProductForm />} /> */}
 				</Routes>
 			)}
 		</div>
