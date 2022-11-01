@@ -33,7 +33,9 @@ function AllProducts() {
       <ul>
         {products.map((product) => (
           <li key={product.id}>
-            <strong>{product.name}</strong>
+            <Link to={`/products/${product.id}`}>
+              <strong>{product.name}</strong>
+            </Link>
             &nbsp; &nbsp; &nbsp; &nbsp;
             <img src={product.imageUrl} />
             <p>Type: {product.type}</p>
