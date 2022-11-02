@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
-import AllProducts from "../allProducts/AllProducts";
 import AdminPage from "../admin/AdminPage";
 import UserCart from "../userCart/UserCart";
 
@@ -18,10 +17,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  const allProductsPage = () => {
-    dispatch(AllProducts());
-    navigate("/products");
-  };
   const adminPage = () => {
     dispatch(AdminPage());
     navigate("/adminPage");
@@ -35,6 +30,7 @@ const Navbar = () => {
 
   return (
     <div>
+
       <h1>FS-App-Template</h1>
       <nav>
         {isLoggedIn ? ( isAdmin? <div>
@@ -58,9 +54,11 @@ const Navbar = () => {
             </button>
             <p>Logged in as: {username}</p>
           </div>
+
         ) : (
-          <div>
+          <div className="login-info">
             {/* The navbar will show these links before you log in */}
+            <Link to="/home">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
