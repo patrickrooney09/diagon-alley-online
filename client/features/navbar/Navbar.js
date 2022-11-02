@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/store";
 import AllProducts from "../allProducts/AllProducts";
 import AdminPage from "../admin/AdminPage";
+import UserCart from "../userCart/UserCart";
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
@@ -40,6 +41,7 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to="/products">Products</Link>
+            <Link to="/user-cart">Cart</Link>
             <Link to="/adminPage">Admin Page</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
@@ -50,7 +52,7 @@ const Navbar = () => {
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to="/products">Products</Link>
-
+            <Link to="/user-cart">Cart</Link>
             <button type="button" onClick={logoutAndRedirectHome}>
               Logout
             </button>
