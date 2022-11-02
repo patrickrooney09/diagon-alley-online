@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import AuthForm from "../features/auth/AuthForm";
 import Home from "../features/home/Home";
+import ProfilePage from "../features/profilePage/profilePage";
 import AllProducts from "../features/allProducts/AllProducts";
 import SingleProduct from "../features/singleProducts/SingleProduct";
 import AdminPage from "../features/admin/AdminPage";
@@ -35,6 +36,7 @@ const AppRoutes = () => {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/purchase-confirmed" element={<PurchaseConfirmed />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/profilePage" element={<ProfilePage />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/products/:productId" element={<SingleProduct />} />
             <Route path="/adminPage" element={<AdminPage />} />
@@ -48,6 +50,7 @@ const AppRoutes = () => {
             <Route path="/*" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/profilePage" element={<ProfilePage />} />
             <Route path="/products" element={<AllProducts />} />
             <Route path="/products/:productId" element={<SingleProduct />} />
             {/* <Route path="/adminPage" element={<AdminPage />} />
@@ -57,10 +60,11 @@ const AppRoutes = () => {
         )
       ) : (
         <Routes>
-          <Route
+          {/* <Route
             path="/*"
             element={<AuthForm name="login" displayName="Login" />}
-          />
+          /> */}
+          <Route path="/*" element={<Home name="home" displayName="Home" />} />
           <Route
             path="/login"
             element={<AuthForm name="login" displayName="Login" />}
@@ -70,6 +74,7 @@ const AppRoutes = () => {
             element={<AuthForm name="signup" displayName="Sign Up" />}
           />
           <Route path="/products" element={<AllProducts />} />
+          <Route path="/profilePage" element={<ProfilePage />} />
           <Route path="/products/:productId/*" element={<SingleProduct />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
