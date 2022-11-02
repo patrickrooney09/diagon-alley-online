@@ -43,7 +43,11 @@ const Navbar = () => {
               <Link to="/home">Home</Link>
               <Link to="/products">Products</Link>
               <Link to="/adminPage">Admin Page</Link>
-              <button type="button" onClick={logoutAndRedirectHome}>
+              <button
+                type="button"
+                class="btn btn-light"
+                onClick={logoutAndRedirectHome}
+              >
                 Logout
               </button>
               <p>Logged in as: {username}</p>
@@ -54,7 +58,11 @@ const Navbar = () => {
               <Link to="/home">Home</Link>
               <Link to="/products">Products</Link>
 
-              <button type="button" onClick={logoutAndRedirectHome}>
+              <button
+                type="button"
+                class="btn btn-light"
+                onClick={logoutAndRedirectHome}
+              >
                 Logout
               </button>
               <p>Logged in as: {username}</p>
