@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCartAsync } from "./cartForUser";
 import { Link } from "react-router-dom";
+import { removeFromCartAsync, clearEntireCartAsync } from "./cartForUser";
 
 const UserCart = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,25 @@ const UserCart = () => {
     dispatch(fetchCartAsync(userId));
   }, [dispatch]);
   // console.log("cart.items:",cart)
+  const handleRemoveFromCart = async (id) => {
+    await dispatch(removeFromCartAsync(id));
+    await dispatch(fetchCartAsync(userId))
+  };
+
+  const handleClearCart = async(id)=>{
+    console.log(id)
+    await dispatch(clearEntireCartAsync(id))
+    await dispatch(fetchCartAsync(userId))
+  }
+
   let userItems = cart.filter((currentItem) => {
     if (currentItem.userId === userId) {
       return currentItem;
     }
   });
-  // console.log("userItems:", userItems[0]);
+
+  let firstItem = userItems[0]
+
   return (
     <div id="user-cart">
       <h1>Items</h1>
@@ -30,9 +44,9 @@ const UserCart = () => {
             <img src={currentItem.imageUrl} alt={currentItem.productName} height= "100" width = "100"/>
             <div>
               <h3>{currentItem.productName}</h3>
-              {/* <button onClick={() => handleRemoveFromCart(cartItem)}>
+              <button onClick={() => handleRemoveFromCart(currentItem.id)}>
               Remove
-            </button> */}
+            </button>
             </div>
             <div>${currentItem.productPrice}</div>
           </div>
@@ -48,9 +62,9 @@ const UserCart = () => {
         ${cartItem.price * cartItem.cartQuantity}
       </div> */}
       <div className="cart-summary">
-        {/* <button className="clear-cart" onClick={() => handleClearCart()}>
+        <button className="clear-cart" onClick={() => handleClearCart(firstItem.id)}>
           Clear Cart
-        </button> */}
+        </button>
         <div className="check-out">
           <div className="subtotal">
             <span>Subtotal</span>
